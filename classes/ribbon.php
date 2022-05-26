@@ -398,8 +398,8 @@ CSS;
 
         $return = [];
         $return['id'] = $this->id;
-        $return['position'] = $this->position;
-        $return['type'] = $this->type;
+        $return['position'] = get_string($this->position, 'tool_ribbons');
+        $return['type'] = get_string($this->type, 'tool_ribbons');
         $return['data'] = $this->data;
         $return['link'] = $this->link;
         $return['colourbg'] = $this->colourbg;
@@ -418,7 +418,7 @@ CSS;
         $positions = [];
 
         foreach (static::POSITIONS as $position) {
-            $positions[$position] = $position;
+            $positions[$position] = get_string($position, 'tool_ribbons');
         }
 
         return $positions;

@@ -55,3 +55,13 @@ $string['ribbon:type:script_help'] = 'This URL will be opened and the text respo
 $string['ribbon:type:script'] = 'Script URL';
 $string['ribbon:type:static'] = 'Static text';
 $string['type'] = 'Type';
+
+// Positions.
+$string['left-top'] = 'left-top';
+$string['right-top'] = 'right-top';
+$string['left-bottom'] = 'left-bottom';
+$string['right-bottom'] = 'right-bottom';
+
+// Types.
+$string['static'] = 'static';
+$string['script'] = 'script';
