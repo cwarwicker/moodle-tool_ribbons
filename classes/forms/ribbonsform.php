@@ -99,6 +99,7 @@ class ribbonsform extends moodleform {
 
             $this->_form->setDefault('colourbg', $ribbon->get_colourbg());
             $this->_form->setDefault('colourtext', $ribbon->get_colourtext());
+            $this->_form->setDefault('link', $ribbon->get_link());
         }
 
     }
