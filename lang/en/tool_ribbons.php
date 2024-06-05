@@ -65,3 +65,6 @@ $string['right-bottom'] = 'right-bottom';
 // Types.
 $string['static'] = 'static';
 $string['script'] = 'script';
+
+// Privacy.
+$string['privacy:metadata'] = 'The Environment ribbons plugin does not store any personal data.';
