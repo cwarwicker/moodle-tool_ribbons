@@ -26,11 +26,19 @@ use tool_ribbons\ribbon;
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Generate HTML to display the ribbons.
- * @return string
+ * Callback to add HTML content to the top of the page body.
+ * Here, we use it to add the markup for the ribbons.
+ *
+ * This function is implemented here and used from two locations:
+ * - tool_ribbons_before_standard_top_of_body_html() in lib.php (for releases up to Moodle 4.3)
+ * - tool_ribbons\hook_callbacks::before_standard_top_of_body_html() in classes/hook_callbacks.php (for Moodle 4.4+).
+ *
+ * @param \core\hook\output\before_standard_top_of_body_html_generation $hook If the hook is passed, then the hook
+ *                                                                            implementation will be used. If not, then
+ *                                                                            legacy implementation will be used.
+ * @return string|void The legacy implementation returns a string, the hook implementation returns nothing.
  */
-function tool_ribbons_before_standard_top_of_body_html() : string {
-
+function tool_ribbons_before_standard_top_of_body_html_callback(&$hook = null) {
     $output = '';
 
     // Load the ribbons.
@@ -41,16 +49,30 @@ function tool_ribbons_before_standard_top_of_body_html() : string {
         $output .= $ribbon->display();
     }
 
-    return $output;
-
+    if ($hook) {
+        // Pass the markup to the hook.
+        $hook->add_html($output);
+    } else {
+        // Return the markup.
+        return $output;
+    }
 }
 
-/**
- * Generate CSS to add to the page to style the ribbons.
- * @return string
- */
-function tool_ribbons_before_standard_html_head() : string {
 
+/**
+ * Callback to add elements to the page <head> html tag.
+ * Here, we use it to add the CSS for the ribbons in a <style> to the page header.
+ *
+ * This function is implemented here and used from two locations:
+ * - tool_ribbons_before_standard_html_head() in lib.php (for releases up to Moodle 4.3)
+ * - tool_ribbons\hook_callbacks::before_standard_head_html_generation() in classes/hook_callbacks.php (for Moodle 4.4+).
+ *
+ * @param \core\hook\output\before_standard_head_html_generation $hook If the hook is passed, then the hook
+ *                                                                            implementation will be used. If not, then
+ *                                                                            legacy implementation will be used.
+ * @return string|void The legacy implementation returns a string, the hook implementation returns nothing.
+ */
+function tool_ribbons_before_standard_html_head_callback(&$hook = null) {
     $output = '<style type="text/css">';
 
     // Load the ribbons.
@@ -63,6 +85,28 @@ function tool_ribbons_before_standard_html_head() : string {
 
     $output .= '</style>';
 
-    return $output;
+    if ($hook) {
+        // Pass the markup to the hook.
+        $hook->add_html($output);
+    } else {
+        // Return the markup.
+        return $output;
+    }
+}
 
+
+/**
+ * Legacy callback that adds the markup for the ribbons to the top of the page body.
+ * @return string
+ */
+function tool_ribbons_before_standard_top_of_body_html() : string {
+    return tool_ribbons_before_standard_top_of_body_html_callback();
+}
+
+/**
+ * Legacy callback that adds CSS for the ribbons in a <style> tag to the page header.
+ * @return string
+ */
+function tool_ribbons_before_standard_html_head() : string {
+    return tool_ribbons_before_standard_html_head_callback();
 }
