@@ -28,6 +28,8 @@ use core\hook\output\before_standard_top_of_body_html_generation;
 
 defined('MOODLE_INTERNAL') || die;
 
+require_once(__DIR__ . '/../lib.php');
+
 /**
  * Hook callbacks for tool_ribbons.
  * @package    tool_ribbons

@@ -39,6 +39,14 @@ defined('MOODLE_INTERNAL') || die();
  * @return string|void The legacy implementation returns a string, the hook implementation returns nothing.
  */
 function tool_ribbons_before_standard_top_of_body_html_callback(&$hook = null) {
+    // Ignore during initial Moodle installation and initial plugin installation.
+    if (during_initial_install() || !get_config('tool_ribbon', 'version')) {
+        if ($hook) {
+            return;
+        }
+        return '';
+    }
+
     $output = '';
 
     // Load the ribbons.
@@ -73,6 +81,14 @@ function tool_ribbons_before_standard_top_of_body_html_callback(&$hook = null) {
  * @return string|void The legacy implementation returns a string, the hook implementation returns nothing.
  */
 function tool_ribbons_before_standard_html_head_callback(&$hook = null) {
+    // Ignore during initial Moodle installation and initial plugin installation.
+    if (during_initial_install() || !get_config('tool_ribbon', 'version')) {
+        if ($hook) {
+            return;
+        }
+        return '';
+    }
+
     $output = '<style type="text/css">';
 
     // Load the ribbons.
