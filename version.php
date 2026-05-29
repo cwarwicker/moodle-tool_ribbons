@@ -29,3 +29,4 @@ $plugin->release = 'v1.0.3';
 $plugin->maturity = MATURITY_STABLE;
 $plugin->cron = 0;
 $plugin->requires = 2019052000;
+$plugin->supported = [405,503];
